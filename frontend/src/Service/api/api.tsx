@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: process.env.API_URL,
     timeout: 3000,
     timeoutErrorMessage: "Connection timeout",
     validateStatus: () => true
