@@ -1,2 +1,5 @@
-
-.idea/misc.xml
+/frontend/dist
+/frontend/node_modules
+.idea
+/controledeservico/.mvn
+/controledeservico/target
