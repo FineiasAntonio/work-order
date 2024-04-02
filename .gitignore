@@ -1,6 +1,5 @@
 /frontend/dist
 /frontend/node_modules
-/frontend/.env
 .idea
 /controledeservico/.mvn
 /controledeservico/target
