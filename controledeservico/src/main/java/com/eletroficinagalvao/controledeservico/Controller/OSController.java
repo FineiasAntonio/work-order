@@ -6,6 +6,7 @@ import com.eletroficinagalvao.controledeservico.Domain.Entity.Midia;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Service.OSService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +26,7 @@ public class OSController {
     private OSService service;
 
     @GetMapping
+    @ApiResponses()
     public ResponseEntity<List<OS>> getAll(){
         List<OS> ordens = service.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(ordens);

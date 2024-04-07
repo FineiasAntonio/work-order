@@ -4,13 +4,14 @@ import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaProdut
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Produto;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.ProdutoReservado;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Reserva;
-import com.eletroficinagalvao.controledeservico.Exception.BadRequestException;
-import com.eletroficinagalvao.controledeservico.Exception.NotFoundException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.BadRequestException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
 import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class ReservaService {
 
-    @Autowired
     private ReservaRepository reservaRepository;
-    @Autowired
     private ProdutoRepository produtoRepository;
 
     public List<Reserva> getAll() {

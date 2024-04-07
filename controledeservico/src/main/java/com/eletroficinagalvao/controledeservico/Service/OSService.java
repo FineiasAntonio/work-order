@@ -5,18 +5,15 @@ import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Midia;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Domain.Mapper.OSMapper;
-import com.eletroficinagalvao.controledeservico.Exception.BadRequestException;
-import com.eletroficinagalvao.controledeservico.Exception.NotFoundException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
 import com.eletroficinagalvao.controledeservico.Repository.OSRepository;
 
 import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

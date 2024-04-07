@@ -4,13 +4,12 @@ import com.eletroficinagalvao.controledeservico.Domain.DTO.Estoque.ProdutoDTO;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Produto;
 import com.eletroficinagalvao.controledeservico.Domain.Mapper.ProdutoMapper;
-import com.eletroficinagalvao.controledeservico.Exception.NotFoundException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
 import com.eletroficinagalvao.controledeservico.Repository.OSRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +20,12 @@ import java.util.UUID;
 @Service
 @Qualifier ("EstoqueService")
 @Log4j2
+@RequiredArgsConstructor
 public class EstoqueService {
 
-    @Autowired
     private ProdutoRepository repository;
-    @Autowired
     private ProdutoMapper produtoMapper;
-    @Autowired
     private ReservaRepository reservaRepository;
-    @Autowired
     private OSRepository osRepository;
 
     public List<Produto> getAll() {

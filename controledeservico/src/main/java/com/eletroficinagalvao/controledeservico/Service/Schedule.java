@@ -4,6 +4,7 @@ import com.eletroficinagalvao.controledeservico.Domain.Entity.*;
 import com.eletroficinagalvao.controledeservico.Repository.OSRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +15,21 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class Schedule {
 
-    @Autowired
     private ProdutoRepository produtoRepository;
-    @Autowired
     private OSRepository osRepository;
-    @Autowired
     private ReservaRepository reservaRepository;
 
     @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.MINUTES)
     public void updateInfos(){
-        atualizarSituacaoOrdem();
-        atualizarValoresProdutos();
-        log.info("Informações atualizadas");
+        updateProductsValues();
+        updateOrderStatus();
+        log.info("Updated infos");
     }
 
-    private void atualizarValoresProdutos() {
-        // Se algum atributo de algum produto do estoque for alterado esse serviço vai atualizar os produtos reservados nas OS
+    private void updateProductsValues() {
 
         reservaRepository.findByAtivo(true).forEach(reserva -> {
             reserva.getProdutos_reservados().forEach(produto -> {
@@ -43,8 +41,7 @@ public class Schedule {
 
     }
 
-    private void atualizarSituacaoOrdem() {
-        // Se alguma ordem de serviço já possuir todas as peças nescessarias reservadas esse serviço vai atualizar o status para "EM ANDAMENTO"
+    private void updateOrderStatus() {
 
         osRepository.findBySituacao(ServicoSituacao.AGUARDANDO_PECA).stream()
                 .filter(x -> x.getReserva().getProdutos_reservados().stream()

@@ -1,4 +1,4 @@
-package com.eletroficinagalvao.controledeservico.Exception;
+package com.eletroficinagalvao.controledeservico.Exception.CustomExceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

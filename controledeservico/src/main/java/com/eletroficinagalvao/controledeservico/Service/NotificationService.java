@@ -14,16 +14,16 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class NotificationService {
 
-    @Autowired
     private ProdutoRepository produtoRepository;
-    @Autowired
     private OSRepository osRepository;
 
     private static List<NotificationDTO> notificationPool = new LinkedList<>();
 
     public List<NotificationDTO> getNotificationPool() {
+        verifyNewNotifications();
         return notificationPool;
     }
 

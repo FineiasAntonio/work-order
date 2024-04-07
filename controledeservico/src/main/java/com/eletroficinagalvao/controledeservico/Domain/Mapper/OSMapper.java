@@ -7,20 +7,16 @@ import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Reserva;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.ServicoSituacao;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.SubSituacao;
-import com.eletroficinagalvao.controledeservico.Exception.BadRequestException;
-import com.eletroficinagalvao.controledeservico.Exception.NotFoundException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.BadRequestException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
 import com.eletroficinagalvao.controledeservico.Repository.FuncionarioRepository;
 
-import com.eletroficinagalvao.controledeservico.Service.FuncionarioService;
-import com.eletroficinagalvao.controledeservico.Service.ReservaService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.stream.DoubleStream;
 
 @Component
 @Log4j2

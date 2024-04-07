@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eletroficinagalvao.controledeservico.Domain.Entity.Funcionario;
-import com.eletroficinagalvao.controledeservico.Exception.InternalServerErrorException;
-import com.eletroficinagalvao.controledeservico.Exception.NotFoundException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.InternalServerErrorException;
+import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
 import com.eletroficinagalvao.controledeservico.Repository.FuncionarioRepository;
 
 import lombok.extern.log4j.Log4j2;
