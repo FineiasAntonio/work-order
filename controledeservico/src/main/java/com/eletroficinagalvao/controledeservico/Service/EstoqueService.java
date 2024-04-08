@@ -8,6 +8,7 @@ import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFo
 import com.eletroficinagalvao.controledeservico.Repository.OSRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
