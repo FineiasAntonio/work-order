@@ -1,42 +1,21 @@
 package com.eletroficinagalvao.controledeservico.Domain.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Builder
 @AllArgsConstructor
-public class ProdutoReservado{
+public class ProdutoReservado extends Produto{
 
-    @Id
-    private UUID id;
-
-    private String produto;
-    private String referencia;
-    private int quantidade;
-    private double precoUnitario;
     int quantidadeNescessaria;
 
     public ProdutoReservado(Produto produto, int quantidadeNescessaria){
-        this.id = produto.getId();
-        this.produto = produto.getProduto();
-        this.referencia = produto.getReferencia();
-        this.quantidade = 0;
-        this.precoUnitario = produto.getPrecoUnitario();
-        this.quantidadeNescessaria = quantidadeNescessaria;
-    }
-
-    public ProdutoReservado(String produto, String referencia, int quantidade, double precoUnitario, int quantidadeNescessaria) {
-        this.produto = produto;
-        this.referencia = referencia;
-        this.quantidade = quantidade;
-        this.precoUnitario = precoUnitario;
+        super(produto);
         this.quantidadeNescessaria = quantidadeNescessaria;
     }
 }

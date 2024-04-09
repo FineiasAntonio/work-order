@@ -1,13 +1,10 @@
 package com.eletroficinagalvao.controledeservico.Domain.DTO.OS;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Estoque.ProdutoDTO;
 import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaDTO;
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaProdutoExistenteDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Midia;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.SubSituacao;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.UUID;
 
 public record UpdateOSRequestDTO(
         String nome,
@@ -19,7 +16,7 @@ public record UpdateOSRequestDTO(
         String numeroSerie,
         String servico,
         String observacao,
-        int funcionarioId,
+        UUID funcionarioId,
         String comentarios,
         boolean concluido,
         SubSituacao subSituacao,

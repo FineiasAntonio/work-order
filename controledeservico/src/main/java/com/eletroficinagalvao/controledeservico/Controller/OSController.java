@@ -2,18 +2,15 @@ package com.eletroficinagalvao.controledeservico.Controller;
 
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.CreateOSRequestDTO;
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Midia;
+import com.eletroficinagalvao.controledeservico.Domain.Entity.Media;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Service.OSService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -65,9 +62,9 @@ public class OSController {
         return mv;
     }
 
-    @PostMapping("/midia/{id}")
-    public ResponseEntity<Void> storageMidia(@PathVariable("id") int id, @RequestBody Midia midia){
-        service.storageMidia(id, midia);
+    @PostMapping("/media/{id}")
+    public ResponseEntity<Void> storageMidia(@PathVariable("id") int id, @RequestBody Media media){
+        service.storageMidia(id, media);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

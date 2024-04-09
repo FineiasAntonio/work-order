@@ -1,17 +1,24 @@
 package com.eletroficinagalvao.controledeservico.Domain.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-@Document(collection = "funcionarios")
 public class Funcionario {
     
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String nome;
 

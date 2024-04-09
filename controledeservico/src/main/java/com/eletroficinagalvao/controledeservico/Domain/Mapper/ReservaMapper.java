@@ -25,7 +25,7 @@ public class ReservaMapper {
     public Reserva criarReserva(ReservaDTO reserva, int idOS) {
 
         if(reserva.produtosExistentes().isEmpty() && reserva.produtosNovos().isEmpty()){
-            Reserva reservaVazia = new Reserva(idOS, new LinkedList<>(), false, reserva.maoDeObra());
+            Reserva reservaVazia = new Reserva(idOS, "", false, reserva.maoDeObra());
             return reservaRepository.save(reservaVazia);
         }
 
@@ -38,15 +38,13 @@ public class ReservaMapper {
             produtosReservados.addAll(reserva.produtosNovos().stream().map(e -> produtoMapper.mapReserva(e)).toList());
         }
 
-        return reservaRepository.save(
-                new Reserva(idOS, produtosReservados, true, reserva.maoDeObra())
-        );
+        Reserva createdReserve = new Reserva(idOS, "", true, reserva.maoDeObra());
+        createdReserve.setProdutos_reservados(produtosReservados);
 
+        return reservaRepository.save(createdReserve);
     }
 
     public Reserva atualizarReserva(Reserva reserva, ReservaDTO reservaAtualizada){
-
-        reserva = reservaRepository.findById(reserva.getId()).orElseThrow(() -> new NullPointerException("Não era pra ser null"));
 
         List<ProdutoReservado> produtosReservados = new LinkedList<>();
 
@@ -58,7 +56,10 @@ public class ReservaMapper {
         }
 
 
-        reserva.getProdutos_reservados().addAll(produtosReservados);
+        List<ProdutoReservado> products = reserva.getProdutos_reservados();
+        products.addAll(produtosReservados);
+        reserva.setProdutos_reservados(products);
+
         reserva.setMaoDeObra(reservaAtualizada.maoDeObra());
 
         if(!reserva.getProdutos_reservados().isEmpty() && !reserva.getProdutos_reservados().stream().allMatch(e -> e.getQuantidade() == e.getQuantidadeNescessaria())){

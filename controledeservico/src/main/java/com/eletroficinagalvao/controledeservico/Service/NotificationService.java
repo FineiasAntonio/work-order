@@ -4,6 +4,7 @@ import com.eletroficinagalvao.controledeservico.Domain.DTO.NotificationDTO;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.*;
 import com.eletroficinagalvao.controledeservico.Repository.OSRepository;
 import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class NotificationService {
         return notificationPool;
     }
 
-    @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.HOURS)
+//    @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.HOURS)
     public void verifyNewNotifications() {
         notificationPool.clear();
 

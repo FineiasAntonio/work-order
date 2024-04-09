@@ -1,6 +1,5 @@
 package com.eletroficinagalvao.controledeservico.Domain.Mapper;
 
-import com.eletroficinagalvao.controledeservico.Config.OSIDControlConfig;
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.CreateOSRequestDTO;
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
@@ -29,10 +28,9 @@ public class OSMapper {
 
     public OS map(CreateOSRequestDTO dto) {
         OS ordemdeservico = new OS();
-        ordemdeservico.setId(OSIDControlConfig.idAtual++);
 
         if (!isValid(dto)) {
-            throw new BadRequestException("Ordem de serviço inválida");
+            throw new BadRequestException("Invalid work order");
         }
 
         ordemdeservico.setReserva(reservaMapper.criarReserva(
@@ -50,7 +48,7 @@ public class OSMapper {
         ordemdeservico.setObservacao(dto.observacao());
         ordemdeservico.setObservacao(dto.comentarios());
         ordemdeservico.setDataSaida(Date.valueOf(dto.dataSaida()));
-        ordemdeservico.setFuncionario(funcionarioRepository.findById(dto.funcionarioId()).get());
+        ordemdeservico.setFuncionario(funcionarioRepository.findById(dto.funcionarioId()).orElseThrow(() -> new NotFoundException("Employee not found")));
         ordemdeservico.setDataEntrada(Date.valueOf(LocalDate.now()));
 
         if (ordemdeservico.getReserva().isAtivo()) {
@@ -67,7 +65,7 @@ public class OSMapper {
     public OS updateMap(OS ordemdeservico, UpdateOSRequestDTO dto) {
 
         if (!isValid(dto)) {
-            throw new BadRequestException("Ordem de serviço inválida");
+            throw new BadRequestException("Invalid work order");
         }
 
         ordemdeservico.setNome(dto.nome());
@@ -81,7 +79,7 @@ public class OSMapper {
         ordemdeservico.setComentarios(dto.comentarios());
         ordemdeservico.setDataSaida(Date.valueOf(dto.dataSaida().toLocalDate()));
         ordemdeservico.setSubSituacao(dto.subSituacao());
-        ordemdeservico.setFuncionario(funcionarioRepository.findById(dto.funcionarioId()).orElseThrow(() -> new NotFoundException("Funcionário não encontrado")));
+        ordemdeservico.setFuncionario(funcionarioRepository.findById(dto.funcionarioId()).orElseThrow(() -> new NotFoundException("Employee not found")));
 
         ordemdeservico.setReserva(reservaMapper.atualizarReserva(
                 ordemdeservico.getReserva(),

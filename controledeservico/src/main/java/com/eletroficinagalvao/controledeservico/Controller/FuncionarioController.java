@@ -1,6 +1,7 @@
 package com.eletroficinagalvao.controledeservico.Controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.eletroficinagalvao.controledeservico.Service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Funcionario> getById(@PathVariable int id){
+    public ResponseEntity<Funcionario> getById(@PathVariable UUID id){
         Funcionario funcionario = service.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(funcionario);
     }

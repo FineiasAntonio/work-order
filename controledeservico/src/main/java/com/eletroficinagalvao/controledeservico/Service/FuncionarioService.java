@@ -1,6 +1,7 @@
 package com.eletroficinagalvao.controledeservico.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +27,7 @@ public class FuncionarioService {
         return repository.findAll();
     }
 
-    public Funcionario getById(int id) {
+    public Funcionario getById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Funcionário não encontrado"));
     }
 
@@ -50,8 +51,8 @@ public class FuncionarioService {
         repository.save(t);
     }
 
-    public void delete(String id) {
-        repository.deleteById(Integer.valueOf(id));
+    public void delete(UUID id) {
+        repository.deleteById(id);
     }
 
     

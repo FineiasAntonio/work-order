@@ -22,7 +22,7 @@ public class Schedule {
     private OSRepository osRepository;
     private ReservaRepository reservaRepository;
 
-    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.MINUTES)
+//    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.MINUTES)
     public void updateInfos(){
         updateProductsValues();
         updateOrderStatus();

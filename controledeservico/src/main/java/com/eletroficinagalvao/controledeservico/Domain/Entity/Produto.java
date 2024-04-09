@@ -1,12 +1,14 @@
 package com.eletroficinagalvao.controledeservico.Domain.Entity;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Id;
 
 import java.util.UUID;
 
@@ -14,24 +16,26 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "estoque")
-public class Produto{
+@Entity
+public class Produto {
 
-        @Id
-        private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-        private String produto;
-        private String referencia;
-        private int quantidade;
-        private double precoUnitario;
+    private String produto;
+    private String referencia;
+    private int quantidade;
+    private double precoUnitario;
 
     public Produto(String produto, String referencia, int quantidade, double precoUnitario) {
-        this.id = UUID.randomUUID();
         this.produto = produto;
         this.referencia = referencia;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
 
+    public Produto(Produto produto) {
+    }
 }
 

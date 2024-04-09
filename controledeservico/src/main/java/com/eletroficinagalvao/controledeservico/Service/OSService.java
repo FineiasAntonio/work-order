@@ -2,7 +2,7 @@ package com.eletroficinagalvao.controledeservico.Service;
 
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.CreateOSRequestDTO;
 import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Midia;
+import com.eletroficinagalvao.controledeservico.Domain.Entity.Media;
 import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
 import com.eletroficinagalvao.controledeservico.Domain.Mapper.OSMapper;
 import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
@@ -64,9 +64,9 @@ public class OSService {
     }
 
     @Transactional
-    public void storageMidia(int id, Midia midia){
+    public void storageMidia(int id, Media media){
         OS os = repository.findById(id).orElseThrow(() -> new NotFoundException("OS não encontrada"));
-        os.getMidias().add(midia);
+        List<Media> osMedias = os.getMedias();
         repository.save(os);
         log.info("Imagem guardada");
     }
