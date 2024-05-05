@@ -1,7 +1,7 @@
 package com.eletroficinagalvao.controledeservico.Controller;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.NotificationDTO;
-import com.eletroficinagalvao.controledeservico.Service.NotificationService;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.NotificationDTO;
+import com.eletroficinagalvao.controledeservico.Domain.Service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

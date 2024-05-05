@@ -1,14 +1,14 @@
 package com.eletroficinagalvao.controledeservico.Domain.Mapper;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.CreateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Reserva;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.ServicoSituacao;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.SubSituacao;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.OS.CreateOSRequestDTO;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.OS.UpdateOSRequestDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.OS;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Reserva;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.ServicoSituacao;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.SubSituacao;
 import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.BadRequestException;
 import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
-import com.eletroficinagalvao.controledeservico.Repository.FuncionarioRepository;
+import com.eletroficinagalvao.controledeservico.Infra.Repository.FuncionarioRepository;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,3 +3,5 @@
 .idea
 /controledeservico/.mvn
 /controledeservico/target
+/UI/.angular
+/UI/node_modules

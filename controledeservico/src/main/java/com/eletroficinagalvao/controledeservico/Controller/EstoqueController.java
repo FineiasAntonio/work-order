@@ -1,9 +1,8 @@
 package com.eletroficinagalvao.controledeservico.Controller;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Estoque.ProdutoDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Produto;
-import com.eletroficinagalvao.controledeservico.Domain.Mapper.ProdutoMapper;
-import com.eletroficinagalvao.controledeservico.Service.EstoqueService;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.Estoque.ProdutoDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Produto;
+import com.eletroficinagalvao.controledeservico.Domain.Service.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;

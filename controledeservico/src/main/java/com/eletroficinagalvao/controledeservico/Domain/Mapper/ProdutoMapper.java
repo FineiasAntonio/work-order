@@ -1,11 +1,11 @@
 package com.eletroficinagalvao.controledeservico.Domain.Mapper;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Estoque.ProdutoDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Produto;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.ProdutoReservado;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.Estoque.ProdutoDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Produto;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.ProdutoReservado;
 import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.BadRequestException;
 import com.eletroficinagalvao.controledeservico.Exception.CustomExceptions.NotFoundException;
-import com.eletroficinagalvao.controledeservico.Repository.ProdutoRepository;
+import com.eletroficinagalvao.controledeservico.Infra.Repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

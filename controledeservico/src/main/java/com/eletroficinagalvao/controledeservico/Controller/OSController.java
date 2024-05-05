@@ -1,10 +1,10 @@
 package com.eletroficinagalvao.controledeservico.Controller;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.CreateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.DTO.OS.UpdateOSRequestDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Media;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.OS;
-import com.eletroficinagalvao.controledeservico.Service.OSService;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.OS.CreateOSRequestDTO;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.OS.UpdateOSRequestDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Media;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.OS;
+import com.eletroficinagalvao.controledeservico.Domain.Service.OSService;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;

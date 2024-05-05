@@ -3,13 +3,13 @@ package com.eletroficinagalvao.controledeservico.Controller;
 import java.util.List;
 import java.util.UUID;
 
-import com.eletroficinagalvao.controledeservico.Service.FuncionarioService;
+import com.eletroficinagalvao.controledeservico.Domain.Service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Funcionario;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Funcionario;
 
 @RestController
 @RequestMapping("/funcionarios")

@@ -1,18 +1,14 @@
 package com.eletroficinagalvao.controledeservico.Domain.Mapper;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Estoque.ProdutoDTO;
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaDTO;
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaProdutoExistenteDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.ProdutoReservado;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Reserva;
-import com.eletroficinagalvao.controledeservico.Repository.ReservaRepository;
-import com.eletroficinagalvao.controledeservico.Service.ReservaService;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.Reserva.ReservaDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.ProdutoReservado;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Reserva;
+import com.eletroficinagalvao.controledeservico.Infra.Repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ReservaMapper {

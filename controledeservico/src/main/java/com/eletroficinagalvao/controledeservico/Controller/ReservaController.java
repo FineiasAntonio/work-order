@@ -1,8 +1,8 @@
 package com.eletroficinagalvao.controledeservico.Controller;
 
-import com.eletroficinagalvao.controledeservico.Domain.DTO.Reserva.ReservaProdutoExistenteDTO;
-import com.eletroficinagalvao.controledeservico.Domain.Entity.Reserva;
-import com.eletroficinagalvao.controledeservico.Service.ReservaService;
+import com.eletroficinagalvao.controledeservico.Infra.DTO.Reserva.ReservaProdutoExistenteDTO;
+import com.eletroficinagalvao.controledeservico.Infra.Entity.Reserva;
+import com.eletroficinagalvao.controledeservico.Domain.Service.ReservaService;
 
 import java.util.List;
 
