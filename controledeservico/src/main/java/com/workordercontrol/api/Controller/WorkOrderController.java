@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/ordensdeservicos")
-public class OSController {
+@RequestMapping ("/workorder")
+public class WorkOrderController {
 
     @Autowired
     private WorkOrderService service;
@@ -61,9 +61,4 @@ public class OSController {
         return mv;
     }
 
-    @PostMapping("/media/{id}")
-    public ResponseEntity<Void> storageMidia(@PathVariable("id") int id, @RequestBody Media media){
-        service.storageMidia(id, media);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
 }

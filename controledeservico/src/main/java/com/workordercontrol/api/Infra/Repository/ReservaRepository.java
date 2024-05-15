@@ -18,6 +18,6 @@ public interface ReservaRepository extends JpaRepository<Reserve, UUID> {
     @Query(nativeQuery = true, value = "DELETE FROM reserves WHERE reserves.work_order_id = :workOrderId")
     void deleteByWorkOrderId(@Param("workOrderId") int workOrderId);
 
-    List<Reserve> findByAtivo(boolean ativo);
+    List<Reserve> findByActive(boolean active);
 
 }

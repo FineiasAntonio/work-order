@@ -28,19 +28,19 @@ public class ProductMapper {
     }
 
     // mapeia para a reserva
-    public ReservedProduct mapReserva(ProductRequest dto) {
-        Product produto = produtoRepository.findByProduto(dto.name())
-                .orElseGet(() -> {
-                    Product supplier = map(dto);
-                    supplier.setQuantity(0);
-                    produtoRepository.save(supplier);
-                    return supplier;
-                });
-
-        int quantidadeNescessaria = dto.quantity();
-
-        return new ReservedProduct(produto, quantidadeNescessaria);
-    }
+//    public ReservedProduct mapReserva(ProductRequest dto) {
+//        Product produto = produtoRepository.findByNameLike(dto.name())
+//                .orElseGet(() -> {
+//                    Product supplier = map(dto);
+//                    supplier.setQuantity(0);
+//                    produtoRepository.save(supplier);
+//                    return supplier;
+//                });
+//
+//        int quantidadeNescessaria = dto.quantity();
+//
+//        return new ReservedProduct(produto, quantidadeNescessaria);
+//    }
 
     // pega do estoque e faz uma nova instancia de produto reservado
     public ReservedProduct reservar(UUID uuidProduto, int quantidadeNescessaria) {

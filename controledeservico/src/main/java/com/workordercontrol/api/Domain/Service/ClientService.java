@@ -6,6 +6,7 @@ import com.workordercontrol.api.Infra.DTO.Employee.EmployeeRequest;
 import com.workordercontrol.api.Infra.Entity.Client;
 import com.workordercontrol.api.Infra.Entity.Employee;
 import com.workordercontrol.api.Infra.Repository.ClientRepository;
+import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Util.DataUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     @Autowired
-    private WorkOrderService workOrderService;
+    private WorkOrderRepository workOrderRepository;
 
     public List<Client> getAll() {
         return clientRepository.findAll();
@@ -59,10 +60,7 @@ public class ClientService {
 
     @Transactional
     public void delete(UUID id) {
-        workOrderService.getAll()
-                .stream()
-                .filter(workOrder -> workOrder.getEmployee().getEmployeeId().equals(id))
-                .forEach(workOrder -> workOrderService.delete(workOrder.getWorkOrderId()));
+        workOrderRepository.deleteByClientId(id);
 
         clientRepository.deleteById(id);
     }

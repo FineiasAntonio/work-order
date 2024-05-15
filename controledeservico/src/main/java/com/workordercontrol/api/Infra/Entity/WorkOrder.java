@@ -18,6 +18,7 @@ public class WorkOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int workOrderId;
 
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
@@ -32,6 +33,7 @@ public class WorkOrder {
     private String service;
     private Status status;
 
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 

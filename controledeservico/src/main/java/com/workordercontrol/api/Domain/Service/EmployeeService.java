@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.workordercontrol.api.Infra.DTO.Employee.EmployeeRequest;
+import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +26,7 @@ public class EmployeeService {
     private FuncionarioRepository repository;
 
     @Autowired
-    private WorkOrderService workOrderService;
+    private WorkOrderRepository workOrderRepository;
 
     public List<Employee> getAll() {
         return repository.findAll();
@@ -60,11 +61,7 @@ public class EmployeeService {
 
     @Transactional
     public void delete(UUID id) {
-        workOrderService.getAll()
-                .stream()
-                .filter(workOrder -> workOrder.getEmployee().getEmployeeId().equals(id))
-                .forEach(workOrder -> workOrderService.delete(workOrder.getWorkOrderId()));
-
+        workOrderRepository.deleteByEmployeeId(id);
         repository.deleteById(id);
     }
 

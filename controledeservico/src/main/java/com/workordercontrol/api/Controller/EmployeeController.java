@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.workordercontrol.api.Domain.Service.EmployeeService;
+import com.workordercontrol.api.Infra.DTO.Employee.EmployeeRequest;
 import com.workordercontrol.api.Infra.Entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/funcionarios")
-public class FuncionarioController {
+public class EmployeeController {
     
     @Autowired
     private EmployeeService service;
@@ -29,19 +30,21 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> create(Employee funcionario){
+    public ResponseEntity<Employee> create(EmployeeRequest funcionario){
         Employee funcionarioCriado = service.create(funcionario);
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioCriado);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> delete(int id){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Void> delete(UUID id){
+        service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping
-    public ResponseEntity<Employee> update(int id, Employee funcionario){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Employee> update(UUID employeeId, EmployeeRequest emplyeeRequest){
+        service.update(employeeId, emplyeeRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

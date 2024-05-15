@@ -12,10 +12,10 @@ import java.util.UUID;
 
 @Repository
 public interface StorageRepository extends JpaRepository<Product, UUID> {
-    List<Product> findByProdutoLike(String name);
+    List<Product> findByNameLike(String name);
 
-    Set<Product> findByQuantidadeGreaterThan(int quantidade);
+    Set<Product> findByQuantityGreaterThan(int quantity);
 
-    Optional<Product> findByProduto(String name);
+    Optional<Product> findByName(String name);
 
 }
