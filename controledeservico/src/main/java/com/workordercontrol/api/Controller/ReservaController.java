@@ -1,7 +1,7 @@
 package com.workordercontrol.api.Controller;
 
 import com.workordercontrol.api.Domain.Service.ReservaService;
-import com.workordercontrol.api.Infra.DTO.Reserva.ReservaProdutoExistenteDTO;
+import com.workordercontrol.api.Infra.DTO.Reserva.ReserveProductsRequest;
 import com.workordercontrol.api.Infra.Entity.Reserve;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class ReservaController {
     }
 
     @PostMapping("/{os}")
-    public ResponseEntity<Void> reservarProduto(@PathVariable int os, @RequestBody ReservaProdutoExistenteDTO produto){
+    public ResponseEntity<Void> reservarProduto(@PathVariable int os, @RequestBody ReserveProductsRequest produto){
         reservaService.reservarProdutoDoEstoque(os, produto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

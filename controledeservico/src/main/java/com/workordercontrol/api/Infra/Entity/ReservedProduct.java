@@ -8,10 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 public class ReservedProduct extends Product {
 
-    private int quantidadeNescessaria;
+    private int requiredQuantity;
 
-    public ReservedProduct(Product produto, int quantidadeNescessaria){
+    public ReservedProduct(Product produto, int requiredQuantity){
         super(produto);
-        this.quantidadeNescessaria = quantidadeNescessaria;
+        this.requiredQuantity = requiredQuantity;
     }
 }

@@ -1,6 +1,6 @@
 package com.workordercontrol.api.Controller;
 
-import com.workordercontrol.api.Domain.Service.EstoqueService;
+import com.workordercontrol.api.Domain.Service.StorageService;
 import com.workordercontrol.api.Infra.DTO.Estoque.ProductRequest;
 import com.workordercontrol.api.Infra.Entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class StorageController {
 
     @Autowired
-    private EstoqueService service;
+    private StorageService service;
 
     @GetMapping
     public ResponseEntity<List<Product>> getAll(){

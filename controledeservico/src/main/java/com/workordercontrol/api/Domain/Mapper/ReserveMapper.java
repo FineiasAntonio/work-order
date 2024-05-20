@@ -1,7 +1,8 @@
 package com.workordercontrol.api.Domain.Mapper;
 
-import com.workordercontrol.api.Infra.DTO.Reserva.ReservaDTO;
-import com.workordercontrol.api.Infra.DTO.Reserva.ReservaProdutoExistenteDTO;
+import com.workordercontrol.api.Domain.Service.StorageService;
+import com.workordercontrol.api.Infra.DTO.Reserva.ReserveRequest;
+import com.workordercontrol.api.Infra.DTO.Reserva.ReserveProductsRequest;
 import com.workordercontrol.api.Infra.Repository.ReservaRepository;
 import com.workordercontrol.api.Infra.Entity.ReservedProduct;
 import com.workordercontrol.api.Infra.Entity.Reserve;
@@ -15,42 +16,42 @@ import java.util.stream.Collectors;
 public class ReserveMapper {
 
     @Autowired
-    private ProductMapper productMapper;
+    private StorageService storageService;
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public Reserve criarReserva(ReservaDTO reserva) {
+    public Reserve createReserve(ReserveRequest reserve) {
 
-        if (reserva.produtosExistentes().isEmpty()) {
-            return new Reserve(reserva.maoDeObra());
+        if (reserve.products().isEmpty()) {
+            return new Reserve(reserve.labor());
         }
 
         Map<UUID, ReservedProduct> produtosReservados = new HashMap<>(
-                reserva.produtosExistentes()
+                reserve.products()
                         .stream()
                         .collect(Collectors.toMap(
-                                ReservaProdutoExistenteDTO::uuidProduto,
-                                e -> productMapper.reservar(e.uuidProduto(), e.quantidade())
+                                ReserveProductsRequest::productId,
+                                e -> storageService.reserve(e.productId(), e.quantity())
                         ))
         );
 
-        return new Reserve(produtosReservados, reserva.maoDeObra());
+        return new Reserve(produtosReservados, reserve.labor());
     }
 
-    public Reserve atualizarReserva(Reserve reserve, ReservaDTO reservaAtualizada) {
+    public Reserve updateReserve(Reserve reserve, ReserveRequest updatedReserveRequest) {
 
-        if (!reservaAtualizada.produtosExistentes().isEmpty()) {
-            reservaAtualizada.produtosExistentes()
+        if (!updatedReserveRequest.products().isEmpty()) {
+            updatedReserveRequest.products()
                     .stream()
-                    .map(e -> productMapper.reservar(e.uuidProduto(), e.quantidade()))
+                    .map(e -> storageService.reserve(e.productId(), e.quantity()))
                     .forEach(product -> {
                         reserve.getReservedProducts().put(product.getProductId(), product);
                     });
         }
 
-        reserve.setMaoDeObra(reservaAtualizada.maoDeObra());
+        reserve.setMaoDeObra(updatedReserveRequest.labor());
 
-        reserve.setActive(!reserve.getReservedProducts().isEmpty() && !reserve.getReservedProducts().values().stream().allMatch(e -> e.getQuantity() == e.getQuantidadeNescessaria()));
+        reserve.setActive(!reserve.getReservedProducts().isEmpty() && !reserve.getReservedProducts().values().stream().allMatch(e -> e.getQuantity() == e.getRequiredQuantity()));
         return reserve;
     }
 

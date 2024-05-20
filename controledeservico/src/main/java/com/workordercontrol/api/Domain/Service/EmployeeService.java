@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.workordercontrol.api.Infra.Entity.Employee;
 import com.workordercontrol.api.Exception.CustomExceptions.NotFoundException;
-import com.workordercontrol.api.Infra.Repository.FuncionarioRepository;
+import com.workordercontrol.api.Infra.Repository.EmployeeRepository;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 public class EmployeeService {
 
     @Autowired
-    private FuncionarioRepository repository;
+    private EmployeeRepository repository;
 
     @Autowired
     private WorkOrderRepository workOrderRepository;

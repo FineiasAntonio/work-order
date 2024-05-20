@@ -46,7 +46,7 @@ public class WorkOrderService {
     public WorkOrder create(WorkOrderCreateRequest workorder) {
         WorkOrder mappedWorkOrder;
         try {
-            mappedWorkOrder = mapper.map(workorder);
+            mappedWorkOrder = mapper.createMap(workorder);
         } catch (ExecutionException | InterruptedException | TimeoutException e) {
             throw new RuntimeException(e);
         }
@@ -84,12 +84,17 @@ public class WorkOrderService {
 
     @Transactional
     public WorkOrder update(int id, WorkOrderUpdateRequest os) {
-        WorkOrder workOrder = repository.findById(id)
-                                            .orElseThrow(() -> new NotFoundException("Work order hasn't been found"));
-        WorkOrder updatedWorkOrder = mapper.updateMap(workOrder, os);
+        try {
+            WorkOrder workOrder = repository.findById(id)
+                    .orElseThrow(() -> new NotFoundException("Work order hasn't been found"));
+            WorkOrder updatedWorkOrder = mapper.updateMap(workOrder, os);
 
-        repository.save(updatedWorkOrder);
-        log.info("Work order nº{} sucessful updated", id);
-        return updatedWorkOrder;
+            repository.save(updatedWorkOrder);
+            log.info("Work order nº{} sucessful updated", id);
+            return updatedWorkOrder;
+
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

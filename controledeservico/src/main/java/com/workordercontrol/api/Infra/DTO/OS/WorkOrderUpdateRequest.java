@@ -1,20 +1,18 @@
 package com.workordercontrol.api.Infra.DTO.OS;
 
-import com.workordercontrol.api.Infra.DTO.Reserva.ReservaDTO;
+import com.workordercontrol.api.Infra.DTO.Reserva.ReserveRequest;
 
 import java.sql.Date;
 import java.util.UUID;
-//TODO: Validation
 
 public record WorkOrderUpdateRequest(
-        Date dataSaida,
-        String equipamento,
-        String numeroSerie,
-        String servico,
-        String observacao,
-        UUID funcionarioId,
-        String comentarios,
-        boolean concluido,
-        ReservaDTO reserva
+        Date exceptedDate,
+        String equipment,
+        String serialNumber,
+        String service,
+        boolean finished,
+        String notes,
+        UUID employeeId,
+        ReserveRequest reserve
 ) {
 }

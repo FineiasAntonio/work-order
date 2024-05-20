@@ -1,21 +1,19 @@
 package com.workordercontrol.api.Infra.DTO.OS;
 
 import com.workordercontrol.api.Infra.DTO.ClientDTO.ClientRequest;
-import com.workordercontrol.api.Infra.DTO.Reserva.ReservaDTO;
-import com.workordercontrol.api.Infra.Entity.Client;
+import com.workordercontrol.api.Infra.DTO.Reserva.ReserveRequest;
 
+import java.sql.Date;
 import java.util.UUID;
 
-//TODO: Validation
 public record WorkOrderCreateRequest(
         ClientRequest client,
-        String dataSaida,
-        String equipamento,
-        String numeroSerie,
-        String servico,
-        String observacao,
-        UUID funcionarioId,
-        String comentarios,
-        ReservaDTO reserva
+        Date exceptedDate,
+        String equipment,
+        String serialNumber,
+        String service,
+        String notes,
+        UUID employeeId,
+        ReserveRequest reserve
 ) {
 }

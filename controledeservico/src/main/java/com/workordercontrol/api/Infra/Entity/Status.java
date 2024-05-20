@@ -3,17 +3,17 @@ package com.workordercontrol.api.Infra.Entity;
 import java.util.Arrays;
 
 public enum Status {
-    CONCLUIDO( 0),
-    EM_ANDAMENTO(1),
-    AGUARDANDO_PECA(2);
+    FINISHED( 0),
+    ONGOING(1),
+    AWATING_PARTS(2);
 
-    private final int valor;
+    private final int value;
 
     Status(int i) {
-        this.valor = i;
+        this.value = i;
     }
 
     public static Status getStatus(int i){
-        return Arrays.stream(Status.values()).filter(e -> e.valor == i).findFirst().get();
+        return Arrays.stream(Status.values()).filter(e -> e.value == i).findFirst().get();
     }
 }

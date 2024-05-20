@@ -8,6 +8,6 @@ import com.workordercontrol.api.Infra.Entity.Employee;
 import java.util.UUID;
 
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Employee, UUID> {
+public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     
 }
