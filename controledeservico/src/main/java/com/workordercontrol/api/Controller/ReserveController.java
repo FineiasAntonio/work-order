@@ -1,6 +1,6 @@
 package com.workordercontrol.api.Controller;
 
-import com.workordercontrol.api.Domain.Service.ReservaService;
+import com.workordercontrol.api.Domain.Service.ReserveService;
 import com.workordercontrol.api.Exception.ExceptionDTO;
 import com.workordercontrol.api.Infra.DTO.Reserva.ReserveProductsRequest;
 import com.workordercontrol.api.Infra.Entity.Reserve;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class ReserveController {
 
     @Autowired
-    private ReservaService reserveService;
+    private ReserveService reserveService;
 
     @GetMapping()
     @ApiResponses(
@@ -51,7 +51,7 @@ public class ReserveController {
     }
     )
     public ResponseEntity<Void> reserveProduct(@PathVariable int workOrderId, @RequestBody ReserveProductsRequest products) {
-        reserveService.reservarProdutoDoEstoque(workOrderId, products);
+        reserveService.reserveProductFromStorage(workOrderId, products);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

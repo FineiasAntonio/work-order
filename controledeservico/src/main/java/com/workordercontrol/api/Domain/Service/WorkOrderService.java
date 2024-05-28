@@ -10,7 +10,7 @@ import com.workordercontrol.api.Infra.Entity.ReservedProduct;
 import com.workordercontrol.api.Infra.Entity.WorkOrder;
 import com.workordercontrol.api.Infra.Repository.StorageRepository;
 import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
-import com.workordercontrol.api.Infra.Repository.ReservaRepository;
+import com.workordercontrol.api.Infra.Repository.ReserveRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class WorkOrderService {
     @Autowired
     private WorkOrderRepository repository;
     @Autowired
-    private ReservaRepository reserveRepository;
+    private ReserveRepository reserveRepository;
     @Autowired
     private StorageRepository storageRepository;
     @Autowired

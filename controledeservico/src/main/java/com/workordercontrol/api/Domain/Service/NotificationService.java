@@ -1,76 +1,85 @@
 package com.workordercontrol.api.Domain.Service;
 
 import com.workordercontrol.api.Infra.DTO.NotificationDTO;
+import com.workordercontrol.api.Infra.Entity.Product;
+import com.workordercontrol.api.Infra.Entity.ReservedProduct;
+import com.workordercontrol.api.Infra.Entity.Status;
+import com.workordercontrol.api.Infra.Entity.WorkOrder;
 import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Infra.Repository.StorageRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class NotificationService {
 
+    @Autowired
     private StorageRepository produtoRepository;
+    @Autowired
     private WorkOrderRepository osRepository;
 
     private static List<NotificationDTO> notificationPool = new LinkedList<>();
 
     public List<NotificationDTO> getNotificationPool() {
-//        verifyNewNotifications();
+        verifyNewNotifications();
         return notificationPool;
     }
 
-//    @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.HOURS)
-//    public void verifyNewNotifications() {
-//        notificationPool.clear();
-//
-//        BiPredicate<Product, ReservedProduct> verify = (x, t) -> x.getId().equals(t.getId());
-//
-//        Set<Product> AllAvaiableProducts = produtoRepository.findByQuantidadeGreaterThan(0);
-//        List<WorkOrder> active = osRepository.findBySituacao(Status.AGUARDANDO_PECA);
-//
-//        for (WorkOrder order : active) {
-//            Set<ReservedProduct> CurrentOrderProducts = new HashSet<>(order.getReserva().getProdutos_reservados());
-//
-//            Set<Product> MatchedProducts = AllAvaiableProducts.stream()
-//                    .filter(e -> CurrentOrderProducts.stream().anyMatch(t -> verify.test(e,t)))
-//                    .collect(Collectors.toSet());
-//
-//
-//            notificationPool.addAll(
-//                    CurrentOrderProducts.stream()
-//                            .filter(expectedProduct ->
-//                                    MatchedProducts.stream()
-//                                            .anyMatch(storagedProduct ->
-//                                                    expectedProduct.getId().equals(storagedProduct.getId()) &&
-//                                                            storagedProduct.getQuantidade() >= expectedProduct.getQuantidadeNescessaria()
-//                                            )
-//                            )
-//                            .map(expectedProduct -> NotificationDTO.builder()
-//                                    .uuid(expectedProduct.getId())
-//                                    .orderID(order.getId())
-//                                    .produto(expectedProduct.getProduto())
-//                                    .quantidade(expectedProduct.getQuantidadeNescessaria())
-//                                    .nomeCliente(order.getNome())
-//                                    .build()
-//                            )
-//                            .toList()
-//            );
-//
-//        }
-//
-//        notificationPool.sort(Collections.reverseOrder(new Comparator<NotificationDTO>() {
-//            @Override
-//            public int compare(NotificationDTO o1, NotificationDTO o2) {
-//                WorkOrder RelatedOrder1 = osRepository.findById(o1.orderID()).get();
-//                WorkOrder RelatedOrder2 = osRepository.findById(o2.orderID()).get();
-//                return Double.compare(RelatedOrder1.getValorTotal(), RelatedOrder2.getValorTotal());
-//            }
-//        }));
-//
-//    }
+    public void verifyNewNotifications() {
+        notificationPool.clear();
+
+        BiPredicate<Product, ReservedProduct> verify = (x, t) -> x.getProductId().equals(t.getProductId());
+
+        Map<UUID, Product> allAvaiableProducts = produtoRepository.findByQuantityGreaterThan(0).stream().collect(Collectors.toMap(Product::getProductId, product -> product));
+        List<WorkOrder> activeWorkOrders = osRepository.findByStatus(Status.AWATING_PARTS);
+
+        for (WorkOrder workOrder : activeWorkOrders) {
+            Set<ReservedProduct> currentWorkOrderReservedProducts = new HashSet<>(workOrder.getReserve().getReservedProducts().values());
+
+            Set<Product> matchedProducts = allAvaiableProducts.values()
+                    .stream()
+                    .filter(e -> currentWorkOrderReservedProducts.stream().anyMatch(t -> verify.test(e,t)))
+                    .collect(Collectors.toSet());
+
+
+            notificationPool.addAll(
+                    currentWorkOrderReservedProducts.stream()
+                            .filter(expectedProduct ->
+                                    matchedProducts.stream()
+                                            .anyMatch(storagedProduct ->
+                                                    expectedProduct.getProductId().equals(storagedProduct.getProductId()) &&
+                                                            storagedProduct.getQuantity() >= expectedProduct.getRequiredQuantity()
+                                            )
+                            )
+                            .map(expectedProduct -> NotificationDTO.builder()
+                                    .productId(expectedProduct.getProductId())
+                                    .workOrderId(workOrder.getWorkOrderId())
+                                    .product(expectedProduct.getName())
+                                    .quantity(expectedProduct.getRequiredQuantity())
+                                    .clientName(workOrder.getClient().getName())
+                                    .build()
+                            )
+                            .toList()
+            );
+
+        }
+
+        notificationPool.sort(Collections.reverseOrder(new Comparator<NotificationDTO>() {
+            @Override
+            public int compare(NotificationDTO o1, NotificationDTO o2) {
+                WorkOrder relatedWorkOrder1 = osRepository.findById(o1.workOrderId()).get();
+                WorkOrder relatedWorkOrder2 = osRepository.findById(o2.workOrderId()).get();
+                return Double.compare(relatedWorkOrder1.getTotalValue(), relatedWorkOrder2.getTotalValue());
+            }
+        }));
+
+    }
 }

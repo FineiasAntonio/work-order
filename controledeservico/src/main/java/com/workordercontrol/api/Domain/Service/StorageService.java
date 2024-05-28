@@ -5,11 +5,11 @@ import com.workordercontrol.api.Infra.DTO.Estoque.ProductRequest;
 import com.workordercontrol.api.Infra.Entity.Product;
 import com.workordercontrol.api.Infra.Entity.ReservedProduct;
 import com.workordercontrol.api.Infra.Repository.StorageRepository;
-import com.workordercontrol.api.Infra.Repository.ReservaRepository;
+import com.workordercontrol.api.Infra.Repository.ReserveRepository;
 import com.workordercontrol.api.Util.DataUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +17,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Qualifier("EstoqueService")
 @Log4j2
-@RequiredArgsConstructor
 public class StorageService {
 
+    @Autowired
     private StorageRepository storageRepository;
-    private ReservaRepository reservaRepository;
+    @Autowired
+    private ReserveRepository reserveRepository;
 
     public List<Product> getAll() {
         return storageRepository.findAll();
@@ -72,13 +72,13 @@ public class StorageService {
     @Transactional
     public void delete(UUID productId) {
 
-        reservaRepository.findAll().forEach(reserve -> {
+        reserveRepository.findAll().forEach(reserve -> {
 
             if (reserve.getReservedProducts().entrySet().removeIf(entry -> entry.getValue().getProductId().equals(productId))) {
                 throw new RuntimeException("Error occurred while attempting to remove products from reservations");
             }
 
-            reservaRepository.save(reserve);
+            reserveRepository.save(reserve);
 
         });
 

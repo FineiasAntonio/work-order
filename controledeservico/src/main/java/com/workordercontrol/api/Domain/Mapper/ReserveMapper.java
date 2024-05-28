@@ -3,7 +3,7 @@ package com.workordercontrol.api.Domain.Mapper;
 import com.workordercontrol.api.Domain.Service.StorageService;
 import com.workordercontrol.api.Infra.DTO.Reserva.ReserveRequest;
 import com.workordercontrol.api.Infra.DTO.Reserva.ReserveProductsRequest;
-import com.workordercontrol.api.Infra.Repository.ReservaRepository;
+import com.workordercontrol.api.Infra.Repository.ReserveRepository;
 import com.workordercontrol.api.Infra.Entity.ReservedProduct;
 import com.workordercontrol.api.Infra.Entity.Reserve;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ReserveMapper {
     @Autowired
     private StorageService storageService;
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReserveRepository reservaRepository;
 
     public Reserve createReserve(ReserveRequest reserve) {
 

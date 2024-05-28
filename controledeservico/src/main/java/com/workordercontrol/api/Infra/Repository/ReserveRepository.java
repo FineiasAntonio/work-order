@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ReservaRepository extends JpaRepository<Reserve, UUID> {
+public interface ReserveRepository extends JpaRepository<Reserve, UUID> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM reserves WHERE reserves.work_order_id = :workOrderId")
     Reserve findByWorkOrderId(@Param("workOrderId") int workOrderId);
