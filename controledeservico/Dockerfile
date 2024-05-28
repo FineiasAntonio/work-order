@@ -2,12 +2,10 @@ FROM amazoncorretto:17-alpine-jdk
 
 RUN apk add --no-cache maven
 
-WORKDIR /
+WORKDIR /app
 
-COPY . .
+COPY pom.xml /app
 
-RUN mvn clean install
+RUN mvn dependency:go-offline
 
-CMD ["java", "-jar", "target/controledeservico-1.0.jar"]
-
-EXPOSE 8080
+COPY . ./app

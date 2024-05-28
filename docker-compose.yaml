@@ -5,11 +5,39 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: eletroficina_galvao_db
+      POSTGRES_DB: api_database
     volumes:
       - postgres:/data/postgres
     ports:
       - "5432:5432"
+    networks:
+      - workordernetwork
+
+  api:
+    container_name: api_container
+    build:
+      context: ./controledeservico
+      dockerfile: Dockerfile
+    volumes:
+      - ./controledeservico:/app
+    working_dir: /app
+    command: >
+      sh -c ' mvn clean install && java -jar target/api-1.0.jar'
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/api_database
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_started
+    networks:
+      - workordernetwork
 
 volumes:
   postgres:
+
+
+networks:
+  workordernetwork:
