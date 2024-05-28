@@ -1,5 +1,7 @@
 package com.workordercontrol.api.Infra.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class WorkOrder {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @Schema(exampleClasses = Client.class)
     private Client client;
 
     private Date createdAt;
@@ -35,6 +38,7 @@ public class WorkOrder {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @Schema(exampleClasses = Employee.class)
     private Employee employee;
 
     @OneToOne(cascade = CascadeType.ALL)

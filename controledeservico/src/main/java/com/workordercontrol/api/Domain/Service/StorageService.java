@@ -35,7 +35,7 @@ public class StorageService {
     }
 
     @Transactional
-    public void create(ProductRequest productRequest) {
+    public Product create(ProductRequest productRequest) {
         Product mappedProduct = Product.builder()
                 .name(productRequest.name())
                 .reference(productRequest.reference())
@@ -43,8 +43,9 @@ public class StorageService {
                 .quantity(productRequest.quantity())
                 .build();
 
-        storageRepository.save(mappedProduct);
+        Product createdProduct = storageRepository.save(mappedProduct);
         log.info("Product {} sucessful registered with {} units", mappedProduct.getName(), mappedProduct.getQuantity());
+        return createdProduct;
     }
 
     @Transactional
@@ -58,13 +59,14 @@ public class StorageService {
     }
 
     @Transactional
-    public void update(UUID productId, Product productRequest) {
+    public Product update(UUID productId, Product productRequest) {
         Product selectedProduct = storageRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product hasn't been found"));
         DataUtils.copyData(productRequest, selectedProduct, "productId");
 
-        storageRepository.save(selectedProduct);
+        Product updatedProduct = storageRepository.save(selectedProduct);
         log.info("Product {} sucessful updated", selectedProduct.getName());
+        return updatedProduct;
     }
 
     @Transactional

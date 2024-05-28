@@ -3,6 +3,7 @@ package com.workordercontrol.api.Infra.Entity;
 import com.workordercontrol.api.Exception.CustomExceptions.InternalServerErrorException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,8 @@ import java.util.UUID;
 public class Reserve {
 
     @Transient
+    @Schema(hidden = true)
     private final ObjectMapper objectMapper = new ObjectMapper();
-    @Transient
-    private Map<UUID, ReservedProduct> reservedProducts = new HashMap<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,23 +29,26 @@ public class Reserve {
 
     private int workOrderId;
 
+    @Transient
+    private Map<UUID, ReservedProduct> reservedProducts = new HashMap<>();
+
     @Column(columnDefinition = "jsonb", name = "reserved_products")
     @Getter(AccessLevel.PROTECTED)
     @Setter(AccessLevel.PROTECTED)
     private String jsonbReservedProducts = "";
 
     private boolean active;
-    private int maoDeObra;
+    private int labor;
 
     public Reserve(int maoDeObra) {
         this.active = false;
-        this.maoDeObra = maoDeObra;
+        this.labor = maoDeObra;
     }
 
     public Reserve(Map<UUID, ReservedProduct> reservedProducts, int maoDeObra) {
         this.reservedProducts = reservedProducts;
         this.active = true;
-        this.maoDeObra = maoDeObra;
+        this.labor = maoDeObra;
     }
 
     @PostLoad

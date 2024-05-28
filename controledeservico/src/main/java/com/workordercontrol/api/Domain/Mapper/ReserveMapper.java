@@ -49,7 +49,7 @@ public class ReserveMapper {
                     });
         }
 
-        reserve.setMaoDeObra(updatedReserveRequest.labor());
+        reserve.setLabor(updatedReserveRequest.labor());
 
         reserve.setActive(!reserve.getReservedProducts().isEmpty() && !reserve.getReservedProducts().values().stream().allMatch(e -> e.getQuantity() == e.getRequiredQuantity()));
         return reserve;

@@ -103,6 +103,6 @@ public class WorkOrderMapper {
                 .values()
                 .stream()
                 .mapToDouble(x -> x.getUnitPrice() * x.getRequiredQuantity())
-                .reduce(0, Double::sum) + reserve.getMaoDeObra();
+                .reduce(0, Double::sum) + reserve.getLabor();
     }
 }

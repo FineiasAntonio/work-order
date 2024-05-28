@@ -1,5 +1,7 @@
 package com.workordercontrol.api.Infra.Entity;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
