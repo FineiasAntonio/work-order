@@ -11,8 +11,8 @@
 	<groupId>com.workordercontrol</groupId>
 	<artifactId>api</artifactId>
 	<version>1.0</version>
-	<name>controledeservico</name>
-	<description>Controle de Serviços e Estoque da Eletroficina Galvão</description>
+	<name>workorderapi</name>
+	<description>Work order and storage controller API for your business</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

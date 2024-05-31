@@ -16,7 +16,7 @@ services:
   api:
     container_name: api_container
     build:
-      context: ./controledeservico
+      context: API
       dockerfile: Dockerfile
     volumes:
       - ./controledeservico:/app
@@ -37,7 +37,6 @@ services:
 
 volumes:
   postgres:
-
 
 networks:
   workordernetwork:
