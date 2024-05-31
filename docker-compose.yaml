@@ -1,41 +1,42 @@
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo_c
-    ports:
-      - "27017:27017"
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: api_database
     volumes:
-      - mongo:/data/db
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
     networks:
-      - server
-    command: mongod --replSet rs0
+      - workordernetwork
 
-  backend:
-    image: backend
-    container_name: back_c
-    build: 
-      context: ./controledeservico
+  api:
+    container_name: api_container
+    build:
+      context: API
+      dockerfile: Dockerfile
+    volumes:
+      - ./controledeservico:/app
+    working_dir: /app
+    command: >
+      sh -c ' mvn clean install && java -jar target/api-1.0.jar'
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/api_database
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
     ports:
       - "8080:8080"
     depends_on:
-      - mongo
+      postgres:
+        condition: service_started
     networks:
-      - server
-
-  # frontend:
-  #   image: frontend
-  #   container_name: front_c
-  #   build: 
-  #     context: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - server
+      - workordernetwork
 
 volumes:
-  mongo:
+  postgres:
 
 networks:
-  server:
+  workordernetwork:
