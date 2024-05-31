@@ -1,5 +1,3 @@
-/frontend/dist
-/frontend/node_modules
-.idea
-/controledeservico/.mvn
-/controledeservico/target
+/API/target
+/API/.idea/
+/.idea/
