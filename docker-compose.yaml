@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres_container
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -13,17 +13,15 @@ services:
     networks:
       - workordernetwork
 
-  api:
-    container_name: api_container
+  api1:
+    container_name: api_container1
     build:
       context: API
       dockerfile: Dockerfile
-    volumes:
-      - ./controledeservico:/app
-    working_dir: /app
     command: >
       sh -c ' mvn clean install && java -jar target/api-1.0.jar'
     environment:
+      API_PORT: 8080
       DATABASE_URL: jdbc:postgresql://postgres:5432/api_database
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
@@ -35,8 +33,40 @@ services:
     networks:
       - workordernetwork
 
+  api2:
+    container_name: api_container2
+    build:
+      context: API
+      dockerfile: Dockerfile
+    command: >
+      sh -c ' mvn clean install && java -jar target/api-1.0.jar'
+    environment:
+      API_PORT: 8081
+      DATABASE_URL: jdbc:postgresql://postgres:5432/api_database
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_started
+    networks:
+      - workordernetwork
+
+  nginx:
+    container_name: nginx_container
+    image: nginx:latest
+    ports:
+      - 80:80
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - workordernetwork
+
 volumes:
   postgres:
+
 
 networks:
   workordernetwork:
