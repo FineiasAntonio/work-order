@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +39,7 @@ public class WorkOrderController {
         return ResponseEntity.status(HttpStatus.OK).body(workOrderList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{workOrderId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -79,7 +78,7 @@ public class WorkOrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdWorkOrder);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{workOrderId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
@@ -96,7 +95,7 @@ public class WorkOrderController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{workOrderId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -120,7 +119,7 @@ public class WorkOrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedWorkOrder);
     }
 
-    @GetMapping("/print/{id}")
+    @GetMapping("/print/{workOrderId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
