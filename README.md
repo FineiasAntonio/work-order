@@ -1,6 +1,6 @@
 # Work Order API
 
-Some workshops recieve a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote a work more confortable.
+Some workshops receive a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote more confortable work.
 
 # Technologies
 
@@ -15,7 +15,7 @@ Some workshops recieve a lot of services per day and most of them don't have any
  
 # Instalation and Use
 
-To make the installation process easy, i did use Docker that become simple and fast the envoriment configuration. Follow the steps below.
+To make the installation process easy, i used Docker that become simple and fast the environment configuration. Follow the steps below.
 
 ⚠️ If you don't have Docker, install here ➡️ [Docker Official Website](https://www.docker.com/products/docker-desktop/)
 
