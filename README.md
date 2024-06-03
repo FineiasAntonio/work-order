@@ -1,10 +1,23 @@
 # Work Order API
 
 Some workshops recieve a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote a work more confortable.
+
+# Technologies
+
+<div style="display: inline-block;"><br>
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" />
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" />
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" />
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" />  
+  <img align="center" width=50 height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" />
+</div>
  
 # Instalation and Use
 
 To make the installation process easy, i did use Docker that become simple and fast the envoriment configuration. Follow the steps below.
+
+⚠️ If you don't have Docker, install here ➡️ [Docker Official Website](https://www.docker.com/products/docker-desktop/)
 
 1 - Clone the repository and navigate to the folder that have the files
 ```bash
