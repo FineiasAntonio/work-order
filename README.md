@@ -1,6 +1,6 @@
 # Work Order API
 
-Some workshops receive a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote more confortable work.
+Many workshops receive a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote more confortable work.
 
 You can make and manage your work orders, clients, products in your storage and reserve any product in any work order and the application will grant order and data integrity.
 
