@@ -4,7 +4,6 @@ import com.workordercontrol.api.Domain.Service.StorageService;
 import com.workordercontrol.api.Exception.ExceptionDTO;
 import com.workordercontrol.api.Infra.DTO.Estoque.ProductRequest;
 import com.workordercontrol.api.Infra.Entity.Product;
-import com.workordercontrol.api.Infra.Entity.WorkOrder;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +36,7 @@ public class StorageController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
     }
 
-    @GetMapping ("/{id}")
+    @GetMapping ("/{productId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -74,7 +73,7 @@ public class StorageController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(productRequest));
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping ("/{productId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
@@ -91,7 +90,7 @@ public class StorageController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping ("/{id}")
+    @PutMapping ("/{productId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",

@@ -7,14 +7,10 @@ import com.workordercontrol.api.Infra.Entity.Status;
 import com.workordercontrol.api.Infra.Entity.WorkOrder;
 import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Infra.Repository.StorageRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
@@ -49,7 +45,6 @@ public class NotificationService {
                     .filter(e -> currentWorkOrderReservedProducts.stream().anyMatch(t -> verify.test(e,t)))
                     .collect(Collectors.toSet());
 
-
             notificationPool.addAll(
                     currentWorkOrderReservedProducts.stream()
                             .filter(expectedProduct ->
@@ -71,15 +66,5 @@ public class NotificationService {
             );
 
         }
-
-        notificationPool.sort(Collections.reverseOrder(new Comparator<NotificationDTO>() {
-            @Override
-            public int compare(NotificationDTO o1, NotificationDTO o2) {
-                WorkOrder relatedWorkOrder1 = osRepository.findById(o1.workOrderId()).get();
-                WorkOrder relatedWorkOrder2 = osRepository.findById(o2.workOrderId()).get();
-                return Double.compare(relatedWorkOrder1.getTotalValue(), relatedWorkOrder2.getTotalValue());
-            }
-        }));
-
     }
 }

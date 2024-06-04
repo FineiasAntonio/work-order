@@ -7,7 +7,6 @@ import com.workordercontrol.api.Domain.Service.EmployeeService;
 import com.workordercontrol.api.Exception.ExceptionDTO;
 import com.workordercontrol.api.Infra.DTO.Employee.EmployeeRequest;
 import com.workordercontrol.api.Infra.Entity.Employee;
-import com.workordercontrol.api.Infra.Entity.Product;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,7 +35,7 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{employeeId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -50,9 +49,9 @@ public class EmployeeController {
             )
     }
     )
-    public ResponseEntity<Employee> getById(@PathVariable UUID id) {
-        Employee funcionario = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(funcionario);
+    public ResponseEntity<Employee> getById(@PathVariable UUID employeeId) {
+        Employee employee = service.getById(employeeId);
+        return ResponseEntity.status(HttpStatus.OK).body(employee);
     }
 
     @PostMapping
@@ -69,12 +68,12 @@ public class EmployeeController {
             )
     }
     )
-    public ResponseEntity<Employee> create(EmployeeRequest funcionario) {
-        Employee funcionarioCriado = service.create(funcionario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioCriado);
+    public ResponseEntity<Employee> create(EmployeeRequest employeeRequest) {
+        Employee createdEmployee = service.create(employeeRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{employeeId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
@@ -86,12 +85,12 @@ public class EmployeeController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionDTO.class))}
             )}
     )
-    public ResponseEntity<Void> delete(UUID id) {
-        service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable UUID employeeId) {
+        service.delete(employeeId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping
+    @PutMapping("/{employeeId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -110,7 +109,7 @@ public class EmployeeController {
             )
     }
     )
-    public ResponseEntity<Employee> update(UUID employeeId, EmployeeRequest employeeRequest) {
+    public ResponseEntity<Employee> update(@PathVariable UUID employeeId, EmployeeRequest employeeRequest) {
         service.update(employeeId, employeeRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

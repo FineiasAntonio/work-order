@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/reserve")
 public class ReserveController {
@@ -37,7 +36,7 @@ public class ReserveController {
         return ResponseEntity.status(HttpStatus.OK).body(reserveService.getAll());
     }
 
-    @PostMapping("/{os}")
+    @PostMapping("/{workOrderId}")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
