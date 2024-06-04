@@ -2,6 +2,8 @@
 
 Some workshops receive a lot of services per day and most of them don't have any solution to organize the data of clients services and order. Thinking about that, i made this API to solve this issue and promote more confortable work.
 
+You can make and manage your work orders, clients, products in your storage and reserve any product in any work order and the application will grant order and data integrity.
+
 # Technologies
 
 <div style="display: inline-block;"><br>
@@ -15,11 +17,15 @@ Some workshops receive a lot of services per day and most of them don't have any
  
 # Instalation and Use
 
+## Prerequisites
+
 To make the installation process easy, i used Docker that become simple and fast the environment configuration. Follow the steps below.
 
 ⚠️ If you don't have Docker, install here ➡️ [Docker Official Website](https://www.docker.com/products/docker-desktop/)
 
-1 - Clone the repository and navigate to the folder that have the files
+## Installation
+
+1 - Clone the repository and navigate to the folder that have the files.
 ```bash
 git clone https://github.com/FineiasAntonio/work-order.git
 cd work-order
@@ -27,4 +33,4 @@ cd work-order
 
 2 - Now just execute ```docker compose up``` and wait until the configuration finish up.
 
-3 - You can acess the documentation in ```http://localhost``` for endpoints details
+3 - You can acess the documentation in ```http://localhost/swagger-ui/index.html``` for endpoints details.
