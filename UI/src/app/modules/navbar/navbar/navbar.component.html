@@ -1,0 +1,21 @@
+<div class="root">
+    <div class="image-container">
+        <img src="assets/gear-logo.svg" alt="Gear Logo">
+    </div>
+
+    <div class="items-container">
+   
+            @for (navbar_item of items; track $index) {
+                <div class="item">
+                    <img src="{{navbar_item.icon}}" alt="{{navbar_item.item}}">
+                </div>
+            }
+     
+    </div>
+
+    <div class="profile-container">
+        <div class="item">
+            <img src="assets/profile-icon.svg" alt="Profile Icon">
+        </div>
+    </div>
+</div>
