@@ -8,6 +8,7 @@ import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class EmployeeService {
 
     @Autowired
     private WorkOrderRepository workOrderRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEnconder;
 
     public List<Employee> getAll() {
         return repository.findAll();
@@ -63,6 +67,5 @@ public class EmployeeService {
         workOrderRepository.deleteByEmployeeId(id);
         repository.deleteById(id);
     }
-
 
 }
