@@ -4,15 +4,13 @@ import com.workordercontrol.api.Domain.Service.ClientService;
 import com.workordercontrol.api.Exception.CustomExceptions.NotFoundException;
 import com.workordercontrol.api.Infra.DTO.OS.WorkOrderCreateRequest;
 import com.workordercontrol.api.Infra.DTO.OS.WorkOrderUpdateRequest;
-import com.workordercontrol.api.Infra.Entity.Client;
-import com.workordercontrol.api.Infra.Entity.WorkOrder;
-import com.workordercontrol.api.Infra.Entity.Reserve;
-import com.workordercontrol.api.Infra.Entity.Status;
+import com.workordercontrol.api.Infra.Entity.*;
 
 import com.workordercontrol.api.Infra.Repository.EmployeeRepository;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.concurrent.FutureTasks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -28,7 +26,6 @@ public class WorkOrderMapper {
     private EmployeeRepository employeeRepository;
     @Autowired
     private ClientService clientService;
-
 
     public WorkOrder createMap(WorkOrderCreateRequest dto) throws ExecutionException, InterruptedException, TimeoutException {
 
@@ -48,7 +45,7 @@ public class WorkOrderMapper {
                 .service(dto.service())
                 .notes(dto.notes())
                 .exceptedDate(Date.valueOf(dto.exceptedDate().toLocalDate()))
-                .employee(employeeRepository.findById(dto.employeeId()).orElseThrow(() -> new NotFoundException("Employee hasn't been found")))
+                .employee((Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .createdAt(Date.valueOf(LocalDate.now()))
                 .build();
 
@@ -75,7 +72,6 @@ public class WorkOrderMapper {
         workOrder.setService(dto.service());
         workOrder.setNotes(dto.notes());
         workOrder.setExceptedDate(Date.valueOf(dto.exceptedDate().toLocalDate()));
-        workOrder.setEmployee(employeeRepository.findById(dto.employeeId()).orElseThrow(() -> new NotFoundException("Employee hasn't been found")));
 
         if (workOrderReserveTask.isDone()){
             workOrder.setReserve(workOrderReserveTask.get(2L, TimeUnit.SECONDS));

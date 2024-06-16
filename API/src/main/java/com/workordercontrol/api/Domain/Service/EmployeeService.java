@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.workordercontrol.api.Infra.DTO.Employee.EmployeeRequest;
+import com.workordercontrol.api.Infra.Entity.Role;
 import com.workordercontrol.api.Infra.Repository.WorkOrderRepository;
 import com.workordercontrol.api.Util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 public class EmployeeService {
 
     @Autowired
-    private EmployeeRepository repository;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private WorkOrderRepository workOrderRepository;
@@ -32,11 +32,11 @@ public class EmployeeService {
     private PasswordEncoder passwordEnconder;
 
     public List<Employee> getAll() {
-        return repository.findAll();
+        return employeeRepository.findAll();
     }
 
     public Employee getById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Employee hasn't been found"));
+        return employeeRepository.findById(id).orElseThrow(() -> new NotFoundException("Employee hasn't been found"));
     }
 
     @Transactional
@@ -45,27 +45,29 @@ public class EmployeeService {
                 .name(request.name())
                 .email(request.email())
                 .number(request.number())
+                .password(passwordEnconder.encode(request.password()))
+                .role(Role.USER)
                 .build();
 
-        Employee registeredEmployee = repository.save(mappedEmployee);
+        Employee registeredEmployee = employeeRepository.save(mappedEmployee);
         log.info("Resgistered employee: " + registeredEmployee.getName());
         return registeredEmployee;
     }
 
     @Transactional
     public void update(UUID employeeId, EmployeeRequest request) {
-        Employee selectedEmployee = repository.findById(employeeId)
+        Employee selectedEmployee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new NotFoundException("Employee hasn't been found"));
         DataUtils.copyData(request, selectedEmployee, "employeeId");
 
-        repository.save(selectedEmployee);
+        employeeRepository.save(selectedEmployee);
         log.info("Employee sucessful updated");
     }
 
     @Transactional
     public void delete(UUID id) {
         workOrderRepository.deleteByEmployeeId(id);
-        repository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 
 }

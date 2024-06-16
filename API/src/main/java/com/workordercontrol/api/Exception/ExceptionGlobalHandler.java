@@ -1,6 +1,7 @@
 package com.workordercontrol.api.Exception;
 
 import com.workordercontrol.api.Exception.CustomExceptions.BadRequestException;
+import com.workordercontrol.api.Exception.CustomExceptions.ForbiddenException;
 import com.workordercontrol.api.Exception.CustomExceptions.InternalServerErrorException;
 import com.workordercontrol.api.Exception.CustomExceptions.NotFoundException;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +25,12 @@ public class ExceptionGlobalHandler{
     public ResponseEntity<ExceptionDTO> handleBadRequestException(BadRequestException e){
         log.error(e.getMessage());
         return new ResponseEntity<>(new ExceptionDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ExceptionDTO> handleForbiddenException(ForbiddenException e){
+        log.error(e.getMessage());
+        return new ResponseEntity<>(new ExceptionDTO(e.getMessage()), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(InternalServerErrorException.class)
