@@ -1,0 +1,30 @@
+<div class="root-container">
+    <h1>Work Orders</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Client</th>
+                    <th>Equipment</th>
+                    <th>Excepted Date</th>
+                    <th>Employee</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (workorderinfo of tableData; track $index) {
+                <tr>
+                    <td>{{workorderinfo.number}}</td>
+                    <td>{{workorderinfo.clientName}}</td>
+                    <td>{{workorderinfo.equipment}}</td>
+                    <td>{{workorderinfo.exceptedDate | date: "MM/dd/yyyy"}}</td>
+                    <td>{{workorderinfo.employee}}</td>
+                    <td>{{workorderinfo.status}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

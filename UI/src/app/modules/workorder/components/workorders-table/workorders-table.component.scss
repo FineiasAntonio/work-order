@@ -1,0 +1,45 @@
+@import "../../../../../styles.scss";
+
+.root-container {
+    padding: 15px;
+    margin-top: -20px;
+    height: 100%;
+}
+
+.table-container {
+    outline: black solid 1px;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 99%;
+    height: 75%;
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+    thead {
+        background-color: $background;
+        color: white;
+        padding: 0;
+        text-align: center;
+        font-family: sans-serif;
+        position: sticky;
+
+        tr {
+            height: 2em;
+        }
+    }
+
+    tbody {
+        text-align: center;
+
+        tr {
+            height: 1.5em;
+        }
+        tr:hover {
+            background-color: gray;
+        }
+    }
+}
